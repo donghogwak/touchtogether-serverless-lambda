@@ -14,7 +14,8 @@ provider:
   region: ap-northeast-2
 
 functions:
-  - ${file(./functions/hello/hello.yml)}
+#  - ${file(./functions/hello/hello.yml)}
+  - ${file(./functions/login/login.yml)}
 #  hello:
 #    handler: handler/handler.hello
 #    events:
