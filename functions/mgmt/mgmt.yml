@@ -1,0 +1,80 @@
+  mgmtuser:
+    handler: functions/mgmt/UserHandler.mgmtuser
+    tags:
+      UserPoolId: ap-northeast-2_fElOQ4A46
+    events:
+      - http:
+          path: mgmt/user
+          method: get
+          request:
+            parameters:
+              querystrings:
+                nexttoken: false
+                limit: false
+                groupname: false
+
+      - http:
+          path: mgmt/user
+          method: post
+
+      - http:
+          path: mgmt/user
+          method: put
+
+      - http:
+          path: mgmt/user
+          method: delete
+
+  mgmtgroup:
+    handler: functions/mgmt/GroupHandler.mgmtgroup
+    tags:
+      UserPoolId: ap-northeast-2_fElOQ4A46
+    events:
+      - http:
+          path: mgmt/group
+          method: get
+          request:
+            parameters:
+              querystrings:
+                nexttoken: false
+                limit: false
+
+      - http:
+          path: mgmt/group
+          method: post
+
+      - http:
+          path: mgmt/group
+          method: put
+
+      - http:
+          path: mgmt/group
+          method: delete
+
+  refreshtoken:
+    handler: functions/mgmt/RefreshTokenHandler.refreshtoken
+    events:
+      - http:
+          path: mgmt/refreshtoken
+          method: post
+
+#		events:
+#			- http:
+#				path: mgmt/user/{usertoken}/{usercount}/{groupname}
+#				method: get
+#                request:
+#                    parameters:
+#                        querystrings:
+#                        paths:
+#       authorizer:
+#         type: aws_iam
+#        cors: true
+#        origin: '*'
+#        headers:
+#          - Content-Type
+#          - X-Amz-Date
+#          - Authorization
+#          - X-Api-Key
+#          - X-Amz-Security-Token
+#          - X-Amz-User-Agent
+#        allowCredentials: false
