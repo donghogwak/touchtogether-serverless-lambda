@@ -10,7 +10,7 @@ if (!AWS.config.region) {
 
 const cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
 
-module.exports.refreshtoken = (event, context, callback) => {
+exports.refreshtoken = (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false;
     let operation = event.httpMethod;
     let params = {};
@@ -25,7 +25,6 @@ module.exports.refreshtoken = (event, context, callback) => {
                 "refreshtoken":""
             }
             */
-            
             params = {
                 AuthFlow: eventParams.authflow,
                 ClientId: eventParams.clientid,
@@ -35,10 +34,10 @@ module.exports.refreshtoken = (event, context, callback) => {
             };
             cognitoidentityserviceprovider.initiateAuth(params, function(err, data){
                 if (err) {
-                    callback(null, failure(JSON.stringify(err));
+                    callback(null, failure(err));
                 }
                 else {
-                    callback(null, success(JSON.stringify(data));
+                    callback(null, success(data));
                 }
             });
             break;

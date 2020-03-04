@@ -1,3 +1,4 @@
+import { success, failure } from '../../lib/response-lib';
 
 const AWS = require('aws-sdk');
 
@@ -9,7 +10,7 @@ if (!AWS.config.region) {
 
 const cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
 
-module.exports.mgmtgroup = (event, context, callback) => {
+exports.mgmtgroup = (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false;
     let operation = event.httpMethod;
     let params = {};
@@ -24,26 +25,26 @@ module.exports.mgmtgroup = (event, context, callback) => {
                 }
                 cognitoidentityserviceprovider.getGroup(params, function(err, data){
                     if (err) {
-                        callback(null, failure(JSON.stringify(err));
+                        callback(null, failure(err));
                     }
                     else {
-                        callback(null, success(JSON.stringify(data));
+                        callback(null, success(data));
                     }
                 });
             */
-            eventParams = JSON.parse(event.queryStringParameters)
+            eventParams = JSON.parse(event.queryStringParameters);
             if (eventParams.nexttoken) {
                 params = {
                     UserPoolId: process.env.UserPoolId,
-                    NextToken: eventParams.nexttoken
+                    NextToken: eventParams.nexttoken,
                     Limit: eventParams.limit ? eventParams : 10
                 };
                 cognitoidentityserviceprovider.listUsers(params, function(err, data){
                     if (err) {
-                        callback(null, failure(JSON.stringify(err));
+                        callback(null, failure(err));
                     }
                     else {
-                        callback(null, success(JSON.stringify(data));
+                        callback(null, success(data));
                     }
                 });
             }
@@ -54,17 +55,17 @@ module.exports.mgmtgroup = (event, context, callback) => {
                 };
                 cognitoidentityserviceprovider.listUsers(params, function(err, data){
                     if (err) {
-                        callback(null, failure(JSON.stringify(err));
+                        callback(null, failure(err));
                     }
                     else {
-                        callback(null, success(JSON.stringify(data));
+                        callback(null, success(data));
                     }
                 });
             }
             break;
         case 'POST':
             /*
-            path: 
+            path:
             params: {
                 groupname: ,
                 description: ,
@@ -81,20 +82,20 @@ module.exports.mgmtgroup = (event, context, callback) => {
                     RoleArn: eventParams.rolearn ? eventParams.rolearn : ''
                 };
             } catch(err) {
-                callback(null, failure(JSON.stringify(err));
+                callback(null, failure(err));
             }
             cognitoidentityserviceprovider.adminCreateUser(params, function(err, data){
                 if (err) {
-                    callback(null, failure(JSON.stringify(err));
+                    callback(null, failure(err));
                 }
                 else {
-                    callback(null, success(JSON.stringify(data));
+                    callback(null, success(data));
                 }
             });
             break;
         case 'PUT':
             /*
-            path: 
+            path:
             params: {
                 groupname: ,
                 description: ,
@@ -105,26 +106,26 @@ module.exports.mgmtgroup = (event, context, callback) => {
             try {
                 params = {
                     GroupName: eventParams.groupname,
-                    UserPoolId: process.env.UserPoolId
+                    UserPoolId: process.env.UserPoolId,
                     Description: eventParams.description ? eventParams.description : '',
                     Precedence: eventParams.precedence ? eventParams.precedence : null,
                     RoleArn: eventParams.rolearn ? eventParams.rolearn : ''
                 };
             } catch(err) {
-                callback(null, failure(JSON.stringify(err));
+                callback(null, failure(err));
             }
             cognitoidentityserviceprovider.updateGroup(params, function(err, data){
                 if (err) {
-                    callback(null, failure(JSON.stringify(err));
+                    callback(null, failure(err));
                 }
                 else {
-                    callback(null, success(JSON.stringify(data));
+                    callback(null, success(data));
                 }
             });
             break;
         case 'DELETE':
             /*
-            path: 
+            path:
             params: {
                 groupname: ,
             }
@@ -135,14 +136,14 @@ module.exports.mgmtgroup = (event, context, callback) => {
                     UserPoolId: process.env.UserPoolId
                 };
             } catch(err) {
-                callback(null, failure(JSON.stringify(err));
+                callback(null, failure(err));
             }
             cognitoidentityserviceprovider.deleteGroup(params, function(err, data){
                 if (err) {
-                    callback(null, failure(JSON.stringify(err));
+                    callback(null, failure(err));
                 }
                 else {
-                    callback(null, success(JSON.stringify(data));
+                    callback(null, success(data));
                 }
             });
             break;
