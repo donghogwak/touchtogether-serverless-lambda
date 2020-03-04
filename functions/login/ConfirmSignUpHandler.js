@@ -14,7 +14,7 @@ exports.confirmsignup = (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false;
     let operation = event.httpMethod;
     let params = {};
-    let eventParams = event.body;
+    let eventParams = JSON.parse(event.body);
     switch (operation) {
         case 'POST':
             /*
