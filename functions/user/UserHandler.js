@@ -26,10 +26,10 @@ module.exports.user = (event, context, callback) => {
             };
             cognitoidentityserviceprovider.getUser(params, function(err, data){
                 if (err) {
-                    callback(null, failure(JSON.stringify(err));
+                    callback(null, failure(JSON.stringify(err)));
                 }
                 else {
-                    callback(null, success(JSON.stringify(data));
+                    callback(null, success(JSON.stringify(data)));
                 }
             });
             break;
@@ -51,14 +51,14 @@ module.exports.user = (event, context, callback) => {
                         ProposedPassword: eventParams.proposedpassword
                     };
                 } catch(err) {
-                    callback(null, failure(JSON.stringify(err));
+                    callback(null, failure(JSON.stringify(err)));
                 }
                 cognitoidentityserviceprovider.changePassword(params, function(err, data){
                     if (err) {
-                        callback(null, failure(JSON.stringify(err));
+                        callback(null, failure(JSON.stringify(err)));
                     }
                     else {
-                        callback(null, success(JSON.stringify(data));
+                        callback(null, success(JSON.stringify(data)));
                     }
                 });
             }
@@ -73,14 +73,14 @@ module.exports.user = (event, context, callback) => {
                         },],*/
                     };
                 } catch(err) {
-                    callback(null, failure(JSON.stringify(err));
+                    callback(null, failure(JSON.stringify(err)));
                 }
                 cognitoidentityserviceprovider.changePassword(params, function(err, data){
                     if (err) {
-                        callback(null, failure(JSON.stringify(err));
+                        callback(null, failure(JSON.stringify(err)));
                     }
                     else {
-                        callback(null, success(JSON.stringify(data));
+                        callback(null, success(JSON.stringify(data)));
                     }
                 });
             }
