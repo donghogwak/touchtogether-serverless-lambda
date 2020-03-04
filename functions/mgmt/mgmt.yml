@@ -1,6 +1,6 @@
   mgmtuser:
     handler: functions/mgmt/UserHandler.mgmtuser
-    tags:
+    environment:
       UserPoolId: ap-northeast-2_fElOQ4A46
     events:
       - http:
@@ -27,7 +27,7 @@
 
   mgmtgroup:
     handler: functions/mgmt/GroupHandler.mgmtgroup
-    tags:
+    environment:
       UserPoolId: ap-northeast-2_fElOQ4A46
     events:
       - http:
@@ -53,6 +53,8 @@
 
   refreshtoken:
     handler: functions/mgmt/RefreshTokenHandler.refreshtoken
+    environment:
+      UserPoolId: ap-northeast-2_fElOQ4A46
     events:
       - http:
           path: mgmt/refreshtoken

@@ -1,5 +1,7 @@
   login:
     handler: functions/login/LoginHandler.login
+    environment:
+      UserPoolId: ap-northeast-2_fElOQ4A46
     events:
       - http:
           path: /login
@@ -7,6 +9,8 @@
 
   signup:
     handler: functions/login/SignUpHandler.signup
+    environment:
+      UserPoolId: ap-northeast-2_fElOQ4A46
     events:
       - http:
           path: /login/signup
@@ -14,6 +18,8 @@
 
   confirmsignup:
     handler: functions/login/ConfirmSignUpHandler.confirmsignup
+    environment:
+      UserPoolId: ap-northeast-2_fElOQ4A46
     events:
       - http:
           path: /login/confirmsignup

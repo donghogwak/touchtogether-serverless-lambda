@@ -32,14 +32,14 @@ exports.mgmtgroup = (event, context, callback) => {
                     }
                 });
             */
-            eventParams = JSON.parse(event.queryStringParameters);
+            eventParams = event.queryStringParameters;
             if (eventParams.nexttoken) {
                 params = {
                     UserPoolId: process.env.UserPoolId,
                     NextToken: eventParams.nexttoken,
                     Limit: eventParams.limit ? eventParams : 10
                 };
-                cognitoidentityserviceprovider.listUsers(params, function(err, data){
+                cognitoidentityserviceprovider.listGroups(params, function(err, data){
                     if (err) {
                         callback(null, failure(err));
                     }
@@ -53,7 +53,7 @@ exports.mgmtgroup = (event, context, callback) => {
                     UserPoolId: process.env.UserPoolId,
                     Limit: eventParams.limit ? eventParams : 10
                 };
-                cognitoidentityserviceprovider.listUsers(params, function(err, data){
+                cognitoidentityserviceprovider.listGroups(params, function(err, data){
                     if (err) {
                         callback(null, failure(err));
                     }
@@ -84,7 +84,7 @@ exports.mgmtgroup = (event, context, callback) => {
             } catch(err) {
                 callback(null, failure(err));
             }
-            cognitoidentityserviceprovider.adminCreateUser(params, function(err, data){
+            cognitoidentityserviceprovider.createGroup(params, function(err, data){
                 if (err) {
                     callback(null, failure(err));
                 }

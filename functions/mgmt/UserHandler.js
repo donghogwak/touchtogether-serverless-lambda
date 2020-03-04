@@ -38,7 +38,7 @@ exports.mgmtuser = (event, context, callback) => {
                 });
             */
             let listKey = 0;
-            eventParams = JSON.parse(event.queryStringParameters);
+            eventParams = event.queryStringParameters;
             if (eventParams.nexttoken) {
                 try {
                     params = {
@@ -120,7 +120,6 @@ exports.mgmtuser = (event, context, callback) => {
             try {
                 params = {
                     UserPoolId: process.env.UserPoolId,
-                    ClientId: eventParams.clientid,
                     Username: eventParams.username,
                     DesiredDeliveryMediums: [
                         "EMAIL",
