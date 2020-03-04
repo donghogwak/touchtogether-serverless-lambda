@@ -1,3 +1,5 @@
+import { success, failure } from '../../lib/response-lib';
+
 const AWS = require('aws-sdk');
 
 if (!AWS.config.region) {
@@ -12,14 +14,7 @@ module.exports.login = (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false;
     let operation = event.httpMethod;
     let params = {};
-    const response = {
-        statusCode: 200,
-        headers: {
-        }, 
-        body: JSON.stringify(event.body),
-        isBase64Encoded: false
-    };
-    const eventParams = JSON.parse(event.body);
+    let eventParams = JSON.parse(event.body);
     switch (operation) {
         case 'POST':
             /*
@@ -28,27 +23,27 @@ module.exports.login = (event, context, callback) => {
                 "authflow":"",
                 "clientid":"",
                 "username":"",
-                , "password":""
+                "password":""
             }
             */
-            
-            params = {
-                AuthFlow: eventParams.authflow,
-                ClientId: eventParams.clientid,
-                AuthParameters: {
-                    USERNAME: eventParams.username,
-                    PASSWORD: eventParams.password
-                }
-            };
+            try {
+                params = {
+                    AuthFlow: eventParams.authflow,
+                    ClientId: eventParams.clientid,
+                    AuthParameters: {
+                        USERNAME: eventParams.username,
+                        PASSWORD: eventParams.password
+                    }
+                };
+            } catch(err) {
+                callback(null, failure(JSON.stringify(err));
+            }
             cognitoidentityserviceprovider.initiateAuth(params, function(err, data){
                 if (err) {
-                    response.statusCode = 502;
-                    response.body = JSON.stringify(err);
-                    callback(null, response);
+                    callback(null, failure(JSON.stringify(err));
                 }
                 else {
-                    response.body = JSON.stringify(data);
-                    callback(null, response);
+                    callback(null, success(JSON.stringify(err));
                 }
             });
             break;

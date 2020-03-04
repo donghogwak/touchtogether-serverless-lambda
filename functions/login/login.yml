@@ -2,22 +2,22 @@
     handler: functions/login/LoginHandler.login
     events:
       - http:
-        path: login
-        method: post
+          path: /login
+          method: post
 
   signup:
     handler: functions/login/SignUpHandler.signup
     events:
       - http:
-        path: login/signup
-        method: post
+          path: /login/signup
+          method: post
 
   confirmsignup:
     handler: functions/login/ConfirmSignUpHandler.confirmsignup
     events:
       - http:
-        path: login/confirmsignup
-        method: post
+          path: /login/confirmsignup
+          method: post
 
 #       authorizer:
 #         type: aws_iam

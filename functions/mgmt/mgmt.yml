@@ -1,0 +1,80 @@
+	refreshtoken:
+		handler: functions/auth/RefreshTokenHandler.refreshtoken
+		events:
+			- http:
+				path: auth/refreshtoken
+				method: post
+
+	user:
+		handler: functions/auth/UserHandler.user
+		tags:
+			UserPoolId: ap-northeast-2_fElOQ4A46
+		events:
+			- http:
+				path: auth/user
+				method: get
+                request:
+                    parameters:
+                        querystrings:
+                            nexttoken: false
+                            limit: false
+                            groupname: false
+
+			- http:
+				path: auth/user
+				method: post
+
+			- http:
+				path: auth/user
+				method: put
+
+			- http:
+				path: auth/user
+				method: delete
+
+	group:
+		handler: functions/auth/GroupHandler.group
+		tags:
+			UserPoolId: ap-northeast-2_fElOQ4A46
+		events:
+			- http:
+				path: auth/group
+				method: get
+                request:
+                    parameters:
+                        querystrings:
+                            nexttoken: false
+                            limit: false
+
+			- http:
+				path: auth/group
+				method: post
+
+			- http:
+				path: auth/group
+				method: put
+
+			- http:
+				path: auth/group
+				method: delete
+
+#		events:
+#			- http:
+#				path: auth/user/{usertoken}/{usercount}/{groupname}
+#				method: get
+#                request:
+#                    parameters:
+#                        querystrings:
+#                        paths:
+#       authorizer:
+#         type: aws_iam
+#        cors: true
+#        origin: '*'
+#        headers:
+#          - Content-Type
+#          - X-Amz-Date
+#          - Authorization
+#          - X-Api-Key
+#          - X-Amz-Security-Token
+#          - X-Amz-User-Agent
+#        allowCredentials: false

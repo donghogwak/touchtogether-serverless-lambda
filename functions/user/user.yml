@@ -1,0 +1,33 @@
+	user:
+		handler: functions/user/UserHandler.user
+		tags:
+			UserPoolId: ap-northeast-2_fElOQ4A46
+		events:
+			- http:
+				path: user
+				method: post
+
+			- http:
+				path: user
+				method: put
+
+#		events:
+#			- http:
+#				path: auth/user/{usertoken}/{usercount}/{groupname}
+#				method: get
+#                request:
+#                    parameters:
+#                        querystrings:
+#                        paths:
+#       authorizer:
+#         type: aws_iam
+#        cors: true
+#        origin: '*'
+#        headers:
+#          - Content-Type
+#          - X-Amz-Date
+#          - Authorization
+#          - X-Api-Key
+#          - X-Amz-Security-Token
+#          - X-Amz-User-Agent
+#        allowCredentials: false

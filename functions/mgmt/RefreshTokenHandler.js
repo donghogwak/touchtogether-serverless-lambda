@@ -10,7 +10,7 @@ if (!AWS.config.region) {
 
 const cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
 
-module.exports.confirmsignup = (event, context, callback) => {
+module.exports.refreshtoken = (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false;
     let operation = event.httpMethod;
     let params = {};
@@ -18,23 +18,22 @@ module.exports.confirmsignup = (event, context, callback) => {
     switch (operation) {
         case 'POST':
             /*
-            path: /touchtogetherConfirmSignUpProto
+            path: /loginTestFunc
             params: {
-                clientid: "",
-                confirmationcode: "",
-                username: "",
+                "authflow":"",
+                "clientid":"",
+                "refreshtoken":""
             }
             */
-            try {
-                params = {
-                    ClientId: eventParams.clientid,
-                    ConfirmationCode: eventParams.confirmationcode,
-                    Username: eventParams.username
-                };
-            } catch(err) {
-                callback(null, failure(JSON.stringify(err));
-            }
-            cognitoidentityserviceprovider.confirmSignUp(params, function(err, data) {
+            
+            params = {
+                AuthFlow: eventParams.authflow,
+                ClientId: eventParams.clientid,
+                AuthParameters: {
+                    REFRESH_TOKEN: eventParams.refreshtoken
+                }
+            };
+            cognitoidentityserviceprovider.initiateAuth(params, function(err, data){
                 if (err) {
                     callback(null, failure(JSON.stringify(err));
                 }

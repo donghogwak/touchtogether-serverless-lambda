@@ -16,6 +16,8 @@ provider:
 functions:
 #  - ${file(./functions/hello/hello.yml)}
   - ${file(./functions/login/login.yml)}
+  - ${file(./functions/user/user.yml)}
+  - ${file(./functions/mgmt/mgmt.yml)}
 #  hello:
 #    handler: handler/handler.hello
 #    events:
