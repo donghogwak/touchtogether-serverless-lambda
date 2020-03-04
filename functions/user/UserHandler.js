@@ -10,7 +10,7 @@ if (!AWS.config.region) {
 
 const cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
 
-module.exports.user = (event, context, callback) => {
+exports.user = (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false;
     let operation = event.httpMethod;
     let params = {};
@@ -19,23 +19,23 @@ module.exports.user = (event, context, callback) => {
         case 'POST':
             /*
             params :
-                accesstoken : 
+                accesstoken : ""
             */
             params = {
                 AccessToken: eventParams.accesstoken
             };
             cognitoidentityserviceprovider.getUser(params, function(err, data){
                 if (err) {
-                    callback(null, failure(JSON.stringify(err)));
+                    callback(null, failure(err));
                 }
                 else {
-                    callback(null, success(JSON.stringify(data)));
+                    callback(null, success(data));
                 }
             });
             break;
         case 'PUT':
             /*
-            path: 
+            path:
             params: {
                 clientid: ,
                 username: ,
@@ -51,14 +51,14 @@ module.exports.user = (event, context, callback) => {
                         ProposedPassword: eventParams.proposedpassword
                     };
                 } catch(err) {
-                    callback(null, failure(JSON.stringify(err)));
+                    callback(null, failure(err));
                 }
                 cognitoidentityserviceprovider.changePassword(params, function(err, data){
                     if (err) {
-                        callback(null, failure(JSON.stringify(err)));
+                        callback(null, failure(err));
                     }
                     else {
-                        callback(null, success(JSON.stringify(data)));
+                        callback(null, success(data));
                     }
                 });
             }
@@ -73,14 +73,14 @@ module.exports.user = (event, context, callback) => {
                         },],*/
                     };
                 } catch(err) {
-                    callback(null, failure(JSON.stringify(err)));
+                    callback(null, failure(err));
                 }
                 cognitoidentityserviceprovider.changePassword(params, function(err, data){
                     if (err) {
-                        callback(null, failure(JSON.stringify(err)));
+                        callback(null, failure(err));
                     }
                     else {
-                        callback(null, success(JSON.stringify(data)));
+                        callback(null, success(data));
                     }
                 });
             }

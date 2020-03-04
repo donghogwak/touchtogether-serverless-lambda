@@ -10,11 +10,11 @@ if (!AWS.config.region) {
 
 const cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
 
-module.exports.signup = (event, context, callback) => {
+exports.signup = (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false;
     let operation = event.httpMethod;
     let params = {};
-    let eventParams = JSON.parse(event.body);
+    let eventParams = event.body;
     switch (operation) {
         case 'POST':
             /*
@@ -44,14 +44,14 @@ module.exports.signup = (event, context, callback) => {
                     ]
                 };
             } catch(err) {
-                callback(null, failure(JSON.stringify(err)));
+                callback(null, failure(err));
             }
             cognitoidentityserviceprovider.signUp(params, function(err, data){
                 if (err) {
-                    callback(null, failure(JSON.stringify(err)));
+                    callback(null, failure(err));
                 }
                 else {
-                    callback(null, success(JSON.stringify(data)));
+                    callback(null, success(data));
                 }
             });
             break;
