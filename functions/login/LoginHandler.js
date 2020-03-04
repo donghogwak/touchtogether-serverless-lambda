@@ -10,7 +10,7 @@ if (!AWS.config.region) {
 
 const cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
 
-module.exports.login = (event, context, callback) => {
+exports.login = (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false;
     let operation = event.httpMethod;
     let params = {};
@@ -36,14 +36,14 @@ module.exports.login = (event, context, callback) => {
                     }
                 };
             } catch(err) {
-                callback(null, failure(JSON.stringify(err));
+                callback(null, failure(err));
             }
             cognitoidentityserviceprovider.initiateAuth(params, function(err, data){
                 if (err) {
-                    callback(null, failure(JSON.stringify(err));
+                    callback(null, failure(err));
                 }
                 else {
-                    callback(null, success(JSON.stringify(err));
+                    callback(null, success(data));
                 }
             });
             break;
