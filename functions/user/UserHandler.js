@@ -75,7 +75,7 @@ exports.user = (event, context, callback) => {
                 } catch(err) {
                     callback(null, failure(err));
                 }
-                cognitoidentityserviceprovider.changePassword(params, function(err, data){
+                cognitoidentityserviceprovider.updateUserAttributes(params, function(err, data){
                     if (err) {
                         callback(null, failure(err));
                     }
