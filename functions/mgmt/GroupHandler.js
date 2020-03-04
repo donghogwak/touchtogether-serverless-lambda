@@ -9,7 +9,7 @@ if (!AWS.config.region) {
 
 const cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
 
-module.exports.group = (event, context, callback) => {
+module.exports.mgmtgroup = (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false;
     let operation = event.httpMethod;
     let params = {};

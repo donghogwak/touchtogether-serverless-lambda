@@ -1,66 +1,66 @@
-	refreshtoken:
-		handler: functions/auth/RefreshTokenHandler.refreshtoken
-		events:
-			- http:
-				path: auth/refreshtoken
-				method: post
+  mgmtuser:
+    handler: functions/mgmt/UserHandler.mgmtuser
+    tags:
+      UserPoolId: ap-northeast-2_fElOQ4A46
+    events:
+      - http:
+          path: mgmt/user
+          method: get
+          request:
+            parameters:
+              querystrings:
+                nexttoken: false
+                limit: false
+                groupname: false
 
-	user:
-		handler: functions/auth/UserHandler.user
-		tags:
-			UserPoolId: ap-northeast-2_fElOQ4A46
-		events:
-			- http:
-				path: auth/user
-				method: get
-                request:
-                    parameters:
-                        querystrings:
-                            nexttoken: false
-                            limit: false
-                            groupname: false
+      - http:
+          path: mgmt/user
+          method: post
 
-			- http:
-				path: auth/user
-				method: post
+      - http:
+          path: mgmt/user
+          method: put
 
-			- http:
-				path: auth/user
-				method: put
+      - http:
+          path: mgmt/user
+          method: delete
 
-			- http:
-				path: auth/user
-				method: delete
+  mgmtgroup:
+    handler: functions/mgmt/GroupHandler.mgmtgroup
+    tags:
+      UserPoolId: ap-northeast-2_fElOQ4A46
+    events:
+      - http:
+          path: mgmt/group
+          method: get
+          request:
+            parameters:
+              querystrings:
+                nexttoken: false
+                limit: false
 
-	group:
-		handler: functions/auth/GroupHandler.group
-		tags:
-			UserPoolId: ap-northeast-2_fElOQ4A46
-		events:
-			- http:
-				path: auth/group
-				method: get
-                request:
-                    parameters:
-                        querystrings:
-                            nexttoken: false
-                            limit: false
+      - http:
+          path: mgmt/group
+          method: post
 
-			- http:
-				path: auth/group
-				method: post
+      - http:
+          path: mgmt/group
+          method: put
 
-			- http:
-				path: auth/group
-				method: put
+      - http:
+          path: mgmt/group
+          method: delete
 
-			- http:
-				path: auth/group
-				method: delete
+  refreshtoken:
+    handler: functions/mgmt/RefreshTokenHandler.refreshtoken
+    events:
+      - http:
+          path: mgmt/refreshtoken
+          method: post
 
 #		events:
 #			- http:
-#				path: auth/user/{usertoken}/{usercount}/{groupname}
+#				path: mgmt/user/{usertoken}/{usercount}/{groupname}
 #				method: get
 #                request:
 #                    parameters:

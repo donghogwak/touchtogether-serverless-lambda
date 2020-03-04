@@ -1,15 +1,15 @@
-	user:
-		handler: functions/user/UserHandler.user
-		tags:
-			UserPoolId: ap-northeast-2_fElOQ4A46
-		events:
-			- http:
-				path: user
-				method: post
+  user:
+    handler: functions/user/UserHandler.user
+    tags:
+      UserPoolId: ap-northeast-2_fElOQ4A46
+    events:
+      - http:
+          path: /user
+          method: post
 
-			- http:
-				path: user
-				method: put
+      - http:
+          path: /user
+          method: put
 
 #		events:
 #			- http:
