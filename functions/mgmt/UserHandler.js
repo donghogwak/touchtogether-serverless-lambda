@@ -29,10 +29,10 @@ module.exports.mgmtuser = (event, context, callback) => {
                 }
                 cognitoidentityserviceprovider.adminGetUser(params, function(err, data){
                     if (err) {
-                        callback(null, failure(JSON.stringify(err));
+                        callback(null, failure(JSON.stringify(err)));
                     }
                     else {
-                        callback(null, success(JSON.stringify(data));
+                        callback(null, success(JSON.stringify(data)));
                     }
                 });
             */
@@ -50,24 +50,24 @@ module.exports.mgmtuser = (event, context, callback) => {
                         listKey = 1
                     }
                 } catch(err) {
-                    callback(null, failure(JSON.stringify(err));
+                    callback(null, failure(JSON.stringify(err)));
                 }
                 if (listKey) {
                     cognitoidentityserviceprovider.listUsersInGroup(params, function(err, data){
                         if (err) {
-                            callback(null, failure(JSON.stringify(err));
+                            callback(null, failure(JSON.stringify(err)));
                         }
                         else {
-                            callback(null, success(JSON.stringify(data));
+                            callback(null, success(JSON.stringify(data)));
                         }
                     });
                 } else {
                     cognitoidentityserviceprovider.listUsers(params, function(err, data){
                         if (err) {
-                            callback(null, failure(JSON.stringify(err));
+                            callback(null, failure(JSON.stringify(err)));
                         }
                         else {
-                            callback(null, success(JSON.stringify(data));
+                            callback(null, success(JSON.stringify(data)));
                         }
                     });
                 }
@@ -83,24 +83,24 @@ module.exports.mgmtuser = (event, context, callback) => {
                         listKey = 1
                     }
                 } catch(err) {
-                    callback(null, failure(JSON.stringify(err));
+                    callback(null, failure(JSON.stringify(err)));
                 }
                 if (listKey) {
                     cognitoidentityserviceprovider.listUsersInGroup(params, function(err, data){
                         if (err) {
-                            callback(null, failure(JSON.stringify(err));
+                            callback(null, failure(JSON.stringify(err)));
                         }
                         else {
-                            callback(null, success(JSON.stringify(data));
+                            callback(null, success(JSON.stringify(data)));
                         }
                     });
                 } else {
                     cognitoidentityserviceprovider.listUsers(params, function(err, data){
                         if (err) {
-                            callback(null, failure(JSON.stringify(err));
+                            callback(null, failure(JSON.stringify(err)));
                         }
                         else {
-                            callback(null, success(JSON.stringify(data));
+                            callback(null, success(JSON.stringify(data)));
                         }
                     });
                 }
@@ -137,14 +137,14 @@ module.exports.mgmtuser = (event, context, callback) => {
                     ]
                 };
             } catch(err) {
-                callback(null, failure(JSON.stringify(err));
+                callback(null, failure(JSON.stringify(err)));
             }
             cognitoidentityserviceprovider.adminCreateUser(params, function(err, data){
                 if (err) {
-                    callback(null, failure(JSON.stringify(err));
+                    callback(null, failure(JSON.stringify(err)));
                 }
                 else {
-                    callback(null, success(JSON.stringify(data));
+                    callback(null, success(JSON.stringify(data)));
                 }
             });
             break;
@@ -164,25 +164,25 @@ module.exports.mgmtuser = (event, context, callback) => {
                     UserPoolId: process.env.UserPoolId
                 };
             } catch(err) {
-                callback(null, failure(JSON.stringify(err));
+                callback(null, failure(JSON.stringify(err)));
             }
             if (eventParams.requestkey == 0){
                 cognitoidentityserviceprovider.adminConfirmSignup(params, function(err, data){
                     if (err) {
-                        callback(null, failure(JSON.stringify(err));
+                        callback(null, failure(JSON.stringify(err)));
                     }
                     else {
-                        callback(null, success(JSON.stringify(data));
+                        callback(null, success(JSON.stringify(data)));
                     }
                 });
             }
             else if (eventParams.requestkey == 1){
                 cognitoidentityserviceprovider.adminResetUserPassword(params, function(err, data){
                     if (err) {
-                        callback(null, failure(JSON.stringify(err));
+                        callback(null, failure(JSON.stringify(err)));
                     }
                     else {
-                        callback(null, success(JSON.stringify(data));
+                        callback(null, success(JSON.stringify(data)));
                     }
                 });
             }
@@ -190,10 +190,10 @@ module.exports.mgmtuser = (event, context, callback) => {
                 params.password = eventParams.password;
                 cognitoidentityserviceprovider.adminSetUserPassword(params, function(err, data){
                     if (err) {
-                        callback(null, failure(JSON.stringify(err));
+                        callback(null, failure(JSON.stringify(err)));
                     }
                     else {
-                        callback(null, success(JSON.stringify(data));
+                        callback(null, success(JSON.stringify(data)));
                     }
                 });
             }
@@ -218,10 +218,10 @@ module.exports.mgmtuser = (event, context, callback) => {
                 ] */
                 cognitoidentityserviceprovider.addCustomAttributes(params, function(err, data){
                     if (err) {
-                        callback(null, failure(JSON.stringify(err));
+                        callback(null, failure(JSON.stringify(err)));
                     }
                     else {
-                        callback(null, success(JSON.stringify(data));
+                        callback(null, success(JSON.stringify(data)));
                     }
                 });
             }
@@ -229,10 +229,10 @@ module.exports.mgmtuser = (event, context, callback) => {
                 params.UserAttributeNames = eventParams.userattrnames;
                 cognitoidentityserviceprovider.adminDeleteUserAttributes(params, function(err, data){
                     if (err) {
-                        callback(null, failure(JSON.stringify(err));
+                        callback(null, failure(JSON.stringify(err)));
                     }
                     else {
-                        callback(null, success(JSON.stringify(data));
+                        callback(null, success(JSON.stringify(data)));
                     }
                 });
             }
@@ -253,14 +253,14 @@ module.exports.mgmtuser = (event, context, callback) => {
                     UserPoolId: process.env.UserPoolId
                 };
             } catch(err) {
-                callback(null, failure(JSON.stringify(err));
+                callback(null, failure(JSON.stringify(err)));
             }
             cognitoidentityserviceprovider.adminDeleteUser(params, function(err, data){
                 if (err) {
-                    callback(null, failure(JSON.stringify(err));
+                    callback(null, failure(JSON.stringify(err)));
                 }
                 else {
-                    callback(null, success(JSON.stringify(data));
+                    callback(null, success(JSON.stringify(data)));
                 }
             });
             break;

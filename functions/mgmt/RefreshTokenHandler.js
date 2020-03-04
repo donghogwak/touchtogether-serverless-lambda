@@ -35,10 +35,10 @@ module.exports.refreshtoken = (event, context, callback) => {
             };
             cognitoidentityserviceprovider.initiateAuth(params, function(err, data){
                 if (err) {
-                    callback(null, failure(JSON.stringify(err));
+                    callback(null, failure(JSON.stringify(err)));
                 }
                 else {
-                    callback(null, success(JSON.stringify(data));
+                    callback(null, success(JSON.stringify(data)));
                 }
             });
             break;

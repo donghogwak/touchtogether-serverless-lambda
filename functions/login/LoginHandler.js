@@ -36,14 +36,14 @@ module.exports.login = (event, context, callback) => {
                     }
                 };
             } catch(err) {
-                callback(null, failure(JSON.stringify(err));
+                callback(null, failure(JSON.stringify(err)));
             }
             cognitoidentityserviceprovider.initiateAuth(params, function(err, data){
                 if (err) {
-                    callback(null, failure(JSON.stringify(err));
+                    callback(null, failure(JSON.stringify(err)));
                 }
                 else {
-                    callback(null, success(JSON.stringify(err));
+                    callback(null, success(JSON.stringify(err)));
                 }
             });
             break;

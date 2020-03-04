@@ -24,10 +24,10 @@ module.exports.mgmtgroup = (event, context, callback) => {
                 }
                 cognitoidentityserviceprovider.getGroup(params, function(err, data){
                     if (err) {
-                        callback(null, failure(JSON.stringify(err));
+                        callback(null, failure(JSON.stringify(err)));
                     }
                     else {
-                        callback(null, success(JSON.stringify(data));
+                        callback(null, success(JSON.stringify(data)));
                     }
                 });
             */
@@ -40,10 +40,10 @@ module.exports.mgmtgroup = (event, context, callback) => {
                 };
                 cognitoidentityserviceprovider.listUsers(params, function(err, data){
                     if (err) {
-                        callback(null, failure(JSON.stringify(err));
+                        callback(null, failure(JSON.stringify(err)));
                     }
                     else {
-                        callback(null, success(JSON.stringify(data));
+                        callback(null, success(JSON.stringify(data)));
                     }
                 });
             }
@@ -54,10 +54,10 @@ module.exports.mgmtgroup = (event, context, callback) => {
                 };
                 cognitoidentityserviceprovider.listUsers(params, function(err, data){
                     if (err) {
-                        callback(null, failure(JSON.stringify(err));
+                        callback(null, failure(JSON.stringify(err)));
                     }
                     else {
-                        callback(null, success(JSON.stringify(data));
+                        callback(null, success(JSON.stringify(data)));
                     }
                 });
             }
@@ -81,14 +81,14 @@ module.exports.mgmtgroup = (event, context, callback) => {
                     RoleArn: eventParams.rolearn ? eventParams.rolearn : ''
                 };
             } catch(err) {
-                callback(null, failure(JSON.stringify(err));
+                callback(null, failure(JSON.stringify(err)));
             }
             cognitoidentityserviceprovider.adminCreateUser(params, function(err, data){
                 if (err) {
-                    callback(null, failure(JSON.stringify(err));
+                    callback(null, failure(JSON.stringify(err)));
                 }
                 else {
-                    callback(null, success(JSON.stringify(data));
+                    callback(null, success(JSON.stringify(data)));
                 }
             });
             break;
@@ -111,14 +111,14 @@ module.exports.mgmtgroup = (event, context, callback) => {
                     RoleArn: eventParams.rolearn ? eventParams.rolearn : ''
                 };
             } catch(err) {
-                callback(null, failure(JSON.stringify(err));
+                callback(null, failure(JSON.stringify(err)));
             }
             cognitoidentityserviceprovider.updateGroup(params, function(err, data){
                 if (err) {
-                    callback(null, failure(JSON.stringify(err));
+                    callback(null, failure(JSON.stringify(err)));
                 }
                 else {
-                    callback(null, success(JSON.stringify(data));
+                    callback(null, success(JSON.stringify(data)));
                 }
             });
             break;
@@ -135,14 +135,14 @@ module.exports.mgmtgroup = (event, context, callback) => {
                     UserPoolId: process.env.UserPoolId
                 };
             } catch(err) {
-                callback(null, failure(JSON.stringify(err));
+                callback(null, failure(JSON.stringify(err)));
             }
             cognitoidentityserviceprovider.deleteGroup(params, function(err, data){
                 if (err) {
-                    callback(null, failure(JSON.stringify(err));
+                    callback(null, failure(JSON.stringify(err)));
                 }
                 else {
-                    callback(null, success(JSON.stringify(data));
+                    callback(null, success(JSON.stringify(data)));
                 }
             });
             break;
