@@ -16,6 +16,11 @@ provider:
   runtime: nodejs12.x
   stage: proto
   region: ap-northeast-2
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - cognito-idp:*
+      Resource: arn:aws:cognito-idp:*:*:*
 
 functions:
 #  - ${file(./functions/hello/hello.yml)}
