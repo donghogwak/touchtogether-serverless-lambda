@@ -20,6 +20,10 @@ exports.mgmtgroup = (event, context, callback) => {
             /*
                 //get a group
                 params = {
+                    nexttoken: "",
+                    limit: "required : no"
+                }
+                params = {
                     UserPoolId: process.env.UserPoolId,
                     GroupName: eventParams.groupname
                 }
@@ -67,8 +71,8 @@ exports.mgmtgroup = (event, context, callback) => {
             /*
             path:
             params: {
-                groupname: ,
-                description: ,
+                groupname: "",
+                description: "",
                 precedence: "",
                 polearn: ""
             }
@@ -97,8 +101,8 @@ exports.mgmtgroup = (event, context, callback) => {
             /*
             path:
             params: {
-                groupname: ,
-                description: ,
+                groupname: "",
+                description: "",
                 precedence: "",
                 polearn: ""
             }
@@ -127,7 +131,7 @@ exports.mgmtgroup = (event, context, callback) => {
             /*
             path:
             params: {
-                groupname: ,
+                groupname: "",
             }
             */
             try {

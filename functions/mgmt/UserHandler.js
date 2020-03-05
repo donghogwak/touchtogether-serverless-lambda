@@ -20,7 +20,7 @@ exports.mgmtuser = (event, context, callback) => {
             /*
                 //get a user
                 params : {
-                    nexttoken : "required : no",
+                    nexttoken : "",
                     limit : "required : no",
                     groupname : "required : no"
                 }
@@ -111,8 +111,8 @@ exports.mgmtuser = (event, context, callback) => {
             /*
             path:
             params: {
-                clientid: "",
                 username: "",
+                messageaction: "RESEND | SUPPRESS",
                 email: "",
                 name: ""
             }
@@ -124,7 +124,8 @@ exports.mgmtuser = (event, context, callback) => {
                     DesiredDeliveryMediums: [
                         "EMAIL",
                     ],
-                    MessageAction: "SUPPRESS",
+                    MessageAction: eventParams.messageaction,
+                    TemporaryPassword: "qwe123!@#",
                     UserAttributes: [
                         {
                             Name: "email",
@@ -152,8 +153,8 @@ exports.mgmtuser = (event, context, callback) => {
             /*
             path:
             params: {
-                clientid: ,
-                username: ,
+                username: "",
+                password: "",
                 email: "",
                 name: ""
             }
@@ -161,7 +162,7 @@ exports.mgmtuser = (event, context, callback) => {
             try {
                 params = {
                     Username: eventParams.username,
-                    UserPoolId: process.env.UserPoolId
+                    UserPoolId: process.env.UserPoolId,
                 };
             } catch(err) {
                 callback(null, failure(err));
@@ -177,17 +178,8 @@ exports.mgmtuser = (event, context, callback) => {
                 });
             }
             else if (eventParams.requestkey == 1){
-                cognitoidentityserviceprovider.adminResetUserPassword(params, function(err, data){
-                    if (err) {
-                        callback(null, failure(err));
-                    }
-                    else {
-                        callback(null, success(data));
-                    }
-                });
-            }
-            else if (eventParams.requestkey == 2){
-                params.password = eventParams.password;
+                params.Password = eventParams.password ? eventParams.password : "qwe123!@#";
+                params.Permanent = false;
                 cognitoidentityserviceprovider.adminSetUserPassword(params, function(err, data){
                     if (err) {
                         callback(null, failure(err));
@@ -197,7 +189,7 @@ exports.mgmtuser = (event, context, callback) => {
                     }
                 });
             }
-            else if (eventParams.requestkey == 3){
+            else if (eventParams.requestkey == 2){
                 params.CustomAttributes = JSON.parse(eventParams.customattributes);
                 /*[
                     {
@@ -225,7 +217,7 @@ exports.mgmtuser = (event, context, callback) => {
                     }
                 });
             }
-            else if (eventParams.requestkey == 4){
+            else if (eventParams.requestkey == 3){
                 params.UserAttributeNames = eventParams.userattrnames;
                 cognitoidentityserviceprovider.adminDeleteUserAttributes(params, function(err, data){
                     if (err) {
@@ -241,10 +233,7 @@ exports.mgmtuser = (event, context, callback) => {
             /*
             path:
             params: {
-                clientid: ,
-                username: ,
-                email: "",
-                name: ""
+                username: "",
             }
             */
             try {
