@@ -41,7 +41,7 @@ exports.mgmtgroup = (event, context, callback) => {
                 params = {
                     UserPoolId: process.env.UserPoolId,
                     NextToken: eventParams.nexttoken,
-                    Limit: eventParams.limit ? eventParams : 10
+                    Limit: eventParams.limit ? Number(eventParams.limit) : 10
                 };
                 cognitoidentityserviceprovider.listGroups(params, function(err, data){
                     if (err) {
@@ -55,7 +55,7 @@ exports.mgmtgroup = (event, context, callback) => {
             else {
                 params = {
                     UserPoolId: process.env.UserPoolId,
-                    Limit: eventParams.limit ? eventParams : 10
+                    Limit: eventParams.limit ? Number(eventParams.limit) : 10
                 };
                 cognitoidentityserviceprovider.listGroups(params, function(err, data){
                     if (err) {

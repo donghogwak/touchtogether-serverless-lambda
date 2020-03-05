@@ -44,7 +44,7 @@ exports.mgmtuser = (event, context, callback) => {
                     params = {
                         UserPoolId: process.env.UserPoolId,
                         PaginationToken: eventParams.nexttoken,
-                        Limit: eventParams.limit ? eventParams.limit : 10
+                        Limit: eventParams.limit ? Number(eventParams.limit) : 10
                     };
                     if (eventParams.groupname) {
                         params.GroupName = eventParams.groupname;
@@ -77,7 +77,7 @@ exports.mgmtuser = (event, context, callback) => {
                 try {
                     params = {
                         UserPoolId: process.env.UserPoolId,
-                        Limit: eventParams.limit ? eventParams.limit : 10
+                        Limit: eventParams.limit ? Number(eventParams.limit) : 10
                     };
                     if (eventParams.groupname) {
                         params.GroupName = eventParams.groupname;
