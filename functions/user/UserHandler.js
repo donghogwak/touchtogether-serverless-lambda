@@ -37,10 +37,7 @@ exports.user = (event, context, callback) => {
             /*
             path:
             params: {
-                clientid: ,
-                username: ,
-                email: "",
-                name: ""
+                accesstoken: ""
             }
             */
             if (eventParams.requestkey == 0) {
@@ -66,11 +63,13 @@ exports.user = (event, context, callback) => {
                 try {
                     params = {
                         AccessToken: eventParams.accesstoken,
-                        UserAttributes: JSON.parse(eventParams.userattributes)
-                        /*[ {
-                            Name: 'STRING_VALUE',
-                            Value: 'STRING_VALUE'
-                        },],*/
+                        UserAttributes: [{
+                            Name: "email",
+                            Value: eventParams.email
+                        },{
+                            Name: "name",
+                            Value: eventParams.name
+                        }]
                     };
                 } catch(err) {
                     callback(null, failure(err));

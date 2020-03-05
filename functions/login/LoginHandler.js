@@ -20,16 +20,14 @@ exports.login = (event, context, callback) => {
             /*
             path: /loginTestFunc
             params: {
-                "authflow":"",
-                "clientid":"",
                 "username":"",
                 "password":""
             }
             */
             try {
                 params = {
-                    AuthFlow: eventParams.authflow,
-                    ClientId: eventParams.clientid,
+                    AuthFlow: process.env.AuthFlow,
+                    ClientId: process.env.ClientId,
                     AuthParameters: {
                         USERNAME: eventParams.username,
                         PASSWORD: eventParams.password

@@ -20,14 +20,12 @@ exports.refreshtoken = (event, context, callback) => {
             /*
             path: /loginTestFunc
             params: {
-                "authflow":"",
-                "clientid":"",
                 "refreshtoken":""
             }
             */
             params = {
-                AuthFlow: eventParams.authflow,
-                ClientId: eventParams.clientid,
+                AuthFlow: process.env.AuthFlow,
+                ClientId: process.env.ClientId,
                 AuthParameters: {
                     REFRESH_TOKEN: eventParams.refreshtoken
                 }

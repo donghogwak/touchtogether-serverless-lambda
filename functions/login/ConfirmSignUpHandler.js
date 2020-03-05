@@ -20,14 +20,13 @@ exports.confirmsignup = (event, context, callback) => {
             /*
             path: /touchtogetherConfirmSignUpProto
             params: {
-                clientid: "",
                 confirmationcode: "",
                 username: "",
             }
             */
             try {
                 params = {
-                    ClientId: eventParams.clientid,
+                    ClientId: process.env.ClientId,
                     ConfirmationCode: eventParams.confirmationcode,
                     Username: eventParams.username
                 };

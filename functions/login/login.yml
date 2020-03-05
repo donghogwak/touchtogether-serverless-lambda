@@ -2,6 +2,8 @@
     handler: functions/login/LoginHandler.login
     environment:
       UserPoolId: ap-northeast-2_fElOQ4A46
+      AuthFlow: USER_PASSWORD_AUTH
+      ClientId: 1evqq06866t3d8ie4bdskk63qa
     events:
       - http:
           path: /login
@@ -11,6 +13,7 @@
     handler: functions/login/SignUpHandler.signup
     environment:
       UserPoolId: ap-northeast-2_fElOQ4A46
+      ClientId: 1evqq06866t3d8ie4bdskk63qa
     events:
       - http:
           path: /login/signup
@@ -20,6 +23,7 @@
     handler: functions/login/ConfirmSignUpHandler.confirmsignup
     environment:
       UserPoolId: ap-northeast-2_fElOQ4A46
+      ClientId: 1evqq06866t3d8ie4bdskk63qa
     events:
       - http:
           path: /login/confirmsignup

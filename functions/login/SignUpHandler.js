@@ -20,7 +20,6 @@ exports.signup = (event, context, callback) => {
             /*
             path: /loginTestFunc
             params: {
-                clientid: "",
                 username: "",
                 password: "",
                 email:"",
@@ -29,7 +28,7 @@ exports.signup = (event, context, callback) => {
             */
             try {
                 params = {
-                    ClientId: eventParams.clientid,
+                    ClientId: process.env.ClientId,
                     Username: eventParams.username,
                     Password: eventParams.password,
                     UserAttributes: [

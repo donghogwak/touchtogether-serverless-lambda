@@ -122,7 +122,7 @@ exports.mgmtuser = (event, context, callback) => {
                     UserPoolId: process.env.UserPoolId,
                     Username: eventParams.username,
                     DesiredDeliveryMediums: [
-                        "EMAIL",
+                        "EMAIL"
                     ],
                     MessageAction: eventParams.messageaction,
                     TemporaryPassword: "qwe123!@#",
@@ -153,22 +153,25 @@ exports.mgmtuser = (event, context, callback) => {
             /*
             path:
             params: {
-                username: "",
-                password: "",
-                email: "",
-                name: ""
+                requestkey: "",
             }
             */
             try {
                 params = {
-                    Username: eventParams.username,
                     UserPoolId: process.env.UserPoolId,
                 };
             } catch(err) {
                 callback(null, failure(err));
             }
             if (eventParams.requestkey == 0){
-                cognitoidentityserviceprovider.adminConfirmSignup(params, function(err, data){
+                params.AuthFlow = process.env.AuthFlow;
+                params.UserPoolId = process.env.UserPoolId;
+                params.ClientId = process.env.ClientId;
+                params.AuthParameters = {
+                    USERNAME: eventParams.username,
+                    PASSWORD: eventParams.password
+                };
+                cognitoidentityserviceprovider.adminInitiateAuth(params, function(err, data){
                     if (err) {
                         callback(null, failure(err));
                     }
@@ -178,6 +181,40 @@ exports.mgmtuser = (event, context, callback) => {
                 });
             }
             else if (eventParams.requestkey == 1){
+                params.ChallengeName = process.env.ChallengeName;
+                params.UserPoolId = process.env.UserPoolId;
+                params.ClientId = process.env.CliendId;
+                params.ChallengeResponses = {
+                    USERNAME: eventParams.username,
+                    NEW_PASSWORD: eventParams.password ? eventParams.password : "qwe123!@#"
+                };
+                params.Session = eventParams.session;
+                cognitoidentityserviceprovider.adminRespondToAuthChallenge(params, function(err, data){
+                    if (err) {
+                        callback(null, failure(err));
+                    }
+                    else {
+                        callback(null, success(data));
+                    }
+                });
+            }
+            else if (eventParams.requestkey == 2){
+                params.Username = eventParams.username;
+                params.UserAttributes = [{
+                    Name: "email_verified",
+                    Value: "true"
+                }];
+                cognitoidentityserviceprovider.adminUpdateUserAttributes(params, function(err, data){
+                    if (err) {
+                        callback(null, failure(err));
+                    }
+                    else {
+                        callback(null, success(data));
+                    }
+                });
+            }
+            else if (eventParams.requestkey == 3){
+                params.Username = eventParams.username;
                 params.Password = eventParams.password ? eventParams.password : "qwe123!@#";
                 params.Permanent = false;
                 cognitoidentityserviceprovider.adminSetUserPassword(params, function(err, data){
@@ -189,37 +226,9 @@ exports.mgmtuser = (event, context, callback) => {
                     }
                 });
             }
-            else if (eventParams.requestkey == 2){
-                params.CustomAttributes = JSON.parse(eventParams.customattributes);
-                /*[
-                    {
-                        AttributeDataType: String | Number | DateTime | Boolean,
-                        DeveloperOnlyAttribute: true || false,
-                        Mutable: true || false,
-                        Name: 'STRING_VALUE',
-                        NumberAttributeConstraints: {
-                            MaxValue: 'STRING_VALUE',
-                            MinValue: 'STRING_VALUE'
-                        },
-                        Required: true || false,
-                        StringAttributeConstraints: {
-                            MaxLength: 'STRING_VALUE',
-                            MinLength: 'STRING_VALUE'
-                        }
-                    },
-                ] */
-                cognitoidentityserviceprovider.addCustomAttributes(params, function(err, data){
-                    if (err) {
-                        callback(null, failure(err));
-                    }
-                    else {
-                        callback(null, success(data));
-                    }
-                });
-            }
-            else if (eventParams.requestkey == 3){
-                params.UserAttributeNames = eventParams.userattrnames;
-                cognitoidentityserviceprovider.adminDeleteUserAttributes(params, function(err, data){
+            else if (eventParams.requestkey == 4){
+                params.Username = eventParams.username;
+                cognitoidentityserviceprovider.adminConfirmSignUp(params, function(err, data){
                     if (err) {
                         callback(null, failure(err));
                     }
